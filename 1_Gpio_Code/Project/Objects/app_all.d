@@ -20,3 +20,6 @@
 .\objects\app_all.o: D:\Keil_v5_1\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\app_all.o: D:\Keil_v5_1\ARM\ARMCC\Bin\..\include\string.h
 .\objects\app_all.o: ..\User\user_Typedef.h
+.\objects\app_all.o: ..\App\App_Tim.h
+.\objects\app_all.o: ..\Middle\Mid_Tim.h
+.\objects\app_all.o: ..\Bsp\Bsp_Tim.h

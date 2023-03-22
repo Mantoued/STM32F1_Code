@@ -19,6 +19,9 @@
 .\objects\main.o: ..\User\user_Typedef.h
 .\objects\main.o: ..\Bsp\Bsp_All.h
 .\objects\main.o: ..\Bsp\Bsp_Gpio.h
+.\objects\main.o: ..\Bsp\Bsp_Tim.h
 .\objects\main.o: ..\App\App_All.h
 .\objects\main.o: ..\App\App_Gpio.h
 .\objects\main.o: ..\Middle\Mid_Gpio.h
+.\objects\main.o: ..\App\App_Tim.h
+.\objects\main.o: ..\Middle\Mid_Tim.h

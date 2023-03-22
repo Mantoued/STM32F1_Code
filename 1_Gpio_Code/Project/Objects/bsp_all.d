@@ -18,3 +18,4 @@
 .\objects\bsp_all.o: D:\Keil_v5_1\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\bsp_all.o: D:\Keil_v5_1\ARM\ARMCC\Bin\..\include\string.h
 .\objects\bsp_all.o: ..\User\user_Typedef.h
+.\objects\bsp_all.o: ..\Bsp\Bsp_Tim.h
