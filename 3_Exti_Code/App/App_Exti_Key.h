@@ -4,9 +4,10 @@
 #include "Mid_Key.h"
 
 typedef struct {
+	uint8_t valid;
+	uint8_t press_Short;
 	uint8_t occur;
 	uint8_t timer;
-	uint8_t valid;
 	uint32_t delay;
 	VOID_FUNC_VOID Key_Short_Func;
 }EXTI_KEY_STRUCT;

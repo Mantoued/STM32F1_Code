@@ -29,19 +29,28 @@ void App_Exti_Key_Data_Init(void)
 
 void App_Exti_Key_Handle(uint8_t _port, EXTI_KEY_STRUCT *_key)
 {
+	if (1 == _key->press_Short)
+	{
+		if (_key->valid != _port)
+		{
+			_key->Key_Short_Func();
+			_key->press_Short = 0;
+			_key->occur = 0;
+		}
+		return;
+	}
 	if (0 == _key->occur) {_key->timer = 0; _key->delay = 0; return;}
 	
 	if (_key->timer == 0)
 	{
 		_key->delay = App_Tim_Get_MS_Inc();
-		_key->delay += 40;
+		_key->delay += 20;
 		_key->timer = 1;
 	}
 	if (_key->delay != App_Tim_Get_MS_Inc()) return;
 	if (_key->valid == _port)
-	{
-		_key->Key_Short_Func();
-	}
+		_key->press_Short = 1;
+	
 	_key->occur = 0;
 	_key->timer = 0;
 	_key->delay = 0;
