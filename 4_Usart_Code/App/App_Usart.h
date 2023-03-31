@@ -4,5 +4,5 @@
 #include "Mid_Usart.h"
 
 void App_Usart_Init(void);
-
+void App_Usart_Recv_And_Send(void);
 #endif

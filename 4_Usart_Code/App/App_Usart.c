@@ -1,8 +1,34 @@
 #include "App_Usart.h"
 
+typedef struct {
+	uint8_t cnt;
+	char buf[128];
+}USART_RECV_DATA;
+
+USART_RECV_DATA Usart_Data;
+
 void App_Usart_Init(void)
 {
+	memset(&Usart_Data, 0, sizeof(USART_RECV_DATA));
 	printf("Hello World!");
 }
 
+void App_Usart_Recv_And_Send(void)
+{
+	uint8_t i;
+	if (Usart_Data.cnt == 0) return;
+	
+	for (i = 0; i < Usart_Data.cnt; i++)
+	{
+		USART_SendData(USART1, Usart_Data.buf[i]);
+		while( USART_GetFlagStatus(USART1,USART_FLAG_TC)!= SET);
+	}
+	Usart_Data.cnt = 0;
+}
 
+void USART1_IRQHandler(void)
+{
+	if (USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)
+		Usart_Data.buf[Usart_Data.cnt++] = USART1->DR;
+	USART_ClearITPendingBit(USART1, USART_IT_RXNE);
+}

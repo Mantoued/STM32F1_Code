@@ -15,6 +15,19 @@ static void _Bsp_Usart_Gpio_Init(void)
 	GPIO_Init(GPIOA, &gpio);
 }
 
+static void _Bsp_Usart_NVIC_Config(void)
+{
+	NVIC_InitTypeDef NVIC_InitStructure;
+	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_0);
+	
+	NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+	
+	NVIC_Init(&NVIC_InitStructure);
+}
+
 void Bsp_Usart_Config(void)
 {
 	USART_InitTypeDef USART_InitStructure;
@@ -28,8 +41,14 @@ void Bsp_Usart_Config(void)
 	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
 	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
 	USART_Init(USART1, &USART_InitStructure);
+	
+	USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);
+	
 	USART_Cmd(USART1, ENABLE);
 	
+	_Bsp_Usart_NVIC_Config();
+	
+	USART_ClearITPendingBit(USART1, USART_IT_RXNE);
 	USART_SendData(USART1, ' ');
 	while( USART_GetFlagStatus(USART1,USART_FLAG_TC)!= SET);
 }
