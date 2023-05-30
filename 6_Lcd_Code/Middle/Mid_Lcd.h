@@ -10,5 +10,5 @@ uint16_t Mid_Lcd_Get_Point (uint16_t _usX1, uint16_t _usY1);
 void Mid_Lcd_Fill_Rect (uint16_t _usX1, uint16_t _usY1, uint16_t _usWeight, uint16_t _usHeight, uint16_t _usColor);
 void Mid_Lcd_Draw_H_Line (uint16_t _usX1 , uint16_t _usY1 , uint16_t _usX2 , uint16_t _usColor);
 void Mid_Lcd_Draw_V_Line (uint16_t _usX1 , uint16_t _usY1 , uint16_t _usY2 , uint16_t _usColor);
-
+void Mid_Lcd_Show_16x16_Ascii(uint16_t _x, uint16_t _y, const char _buf[], uint16_t _len, uint16_t _color, uint16_t _bkColor);
 #endif

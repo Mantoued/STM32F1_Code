@@ -522,6 +522,11 @@
               <FileType>1</FileType>
               <FilePath>..\Middle\Mid_Lcd.c</FilePath>
             </File>
+            <File>
+              <FileName>Mid_Ascii.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Middle\Mid_Ascii.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

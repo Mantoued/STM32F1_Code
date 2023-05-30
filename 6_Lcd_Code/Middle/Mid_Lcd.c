@@ -1,4 +1,5 @@
 #include "Mid_Lcd.h"
+#include "Mid_Ascii.h"
 
 void Mid_Lcd_Set_Disp_HV (uint8_t _HV)
 {
@@ -31,12 +32,14 @@ void Mid_Lcd_Open_Window (u16 x, u16 y, u16 weight, u16 height)
 	Bsp_Lcd_Write_Cmd(0x2c);	
 }
 
+//画点
 void Mid_Lcd_Set_Point (uint16_t _usX1, uint16_t _usY1, uint16_t _usColor)
 {
 	Mid_Lcd_Open_Window(_usX1, _usY1, 1, 1);
 	Bsp_Lcd_Write_Data(_usColor);
 }
 
+//获取点
 uint16_t Mid_Lcd_Get_Point (uint16_t _usX1, uint16_t _usY1)
 {
 	uint16_t temp,r,g,b;
@@ -50,6 +53,7 @@ uint16_t Mid_Lcd_Get_Point (uint16_t _usX1, uint16_t _usY1)
 	return temp;
 }
 
+//填充矩形
 void Mid_Lcd_Fill_Rect (uint16_t _usX1, uint16_t _usY1, uint16_t _usWeight, uint16_t _usHeight, uint16_t _usColor)
 {
 	uint32_t n;
@@ -60,6 +64,7 @@ void Mid_Lcd_Fill_Rect (uint16_t _usX1, uint16_t _usY1, uint16_t _usWeight, uint
 	}
 }
 
+//画平行线
 void Mid_Lcd_Draw_H_Line (uint16_t _usX1 , uint16_t _usY1 , uint16_t _usX2 , uint16_t _usColor)
 {
 	uint16_t i;
@@ -71,6 +76,7 @@ void Mid_Lcd_Draw_H_Line (uint16_t _usX1 , uint16_t _usY1 , uint16_t _usX2 , uin
 	}
 }
 
+//画垂直线
 void Mid_Lcd_Draw_V_Line (uint16_t _usX1 , uint16_t _usY1 , uint16_t _usY2 , uint16_t _usColor)
 {
 	uint16_t i;
@@ -79,6 +85,28 @@ void Mid_Lcd_Draw_V_Line (uint16_t _usX1 , uint16_t _usY1 , uint16_t _usY2 , uin
 	for (i = 0; i < (_usY2- _usY1 + 1); i++)
 	{
 		TFT->TFT_DATA = _usColor;
+	}
+}
+
+//显示16x16字符
+void Mid_Lcd_Show_16x16_Ascii(uint16_t _x, uint16_t _y, const char _buf[], uint16_t _len, uint16_t _color, uint16_t _bkColor)
+{
+	uint16_t i;
+	uint8_t row, p;
+	uint8_t c;
+	Mid_Lcd_Open_Window(_x, _y, 8, 16);
+	for (i = 0; i < _len; i++)
+	{
+		Mid_Lcd_Open_Window(_x + (i * 8), _y, 8, 16);
+		for (row = 0; row < 16; row++)
+		{
+			c = Mid_Ascii[_buf[i] - MID_ASCII_START_INDEX][row];
+			for (p = 0; p < 8; p++)
+			{
+				TFT->TFT_DATA = ((c & 0x01) == 0) ? _bkColor : _color;
+				c >>= 1;
+			}
+		}
 	}
 }
 
