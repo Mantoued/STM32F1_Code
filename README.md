@@ -9,7 +9,7 @@ STM32F103ZET6 开发板的一些代码
 5_Adc_Code/   ADC1的DMA方式采集
 6_Lcd_Code/   Lcd显示16x16 ASCII
 7_IIC_CODE/   IIC2读写
-
+8_SPI_CODE/   SPI Flash读写
 100_原理图/    所用的开发板原理图
 
 
